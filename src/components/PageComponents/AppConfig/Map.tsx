@@ -12,9 +12,12 @@ import { MapValidation } from "@app/validation/appConfig/map.js";
 import { Form } from "@components/form/Form";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { classValidatorResolver } from "@hookform/resolvers/class-validator";
+import { renderOptions } from "@app/core/utils/selectEnumOptions";
+import { Protobuf } from "@meshtastic/meshtasticjs";
+import { Select } from "@app/components/form/Select";
 
 export const Map = (): JSX.Element => {
-  const { rasterSources, setRasterSources } = useAppStore();
+  const { rasterSources, setRasterSources, setLocMode } = useAppStore();
 
   const {
     register,
@@ -42,6 +45,7 @@ export const Map = (): JSX.Element => {
 
   const onSubmit = handleSubmit((data) => {
     setRasterSources(data.rasterSources);
+    //setLocMode()
   });
 
   // useEffect(() => {
@@ -126,6 +130,12 @@ export const Map = (): JSX.Element => {
           </Button>
         </div>
       </InfoWrapper>
+      <Select
+      label="Set GPS format"
+      {...register("locationFormat")}
+      >
+      {renderOptions(Protobuf.Config_DisplayConfig_GpsCoordinateFormat)}
+      </Select>
     </Form>
   );
 };

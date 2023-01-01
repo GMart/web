@@ -1,3 +1,4 @@
+import { Protobuf } from "@meshtastic/meshtasticjs";
 import { produce } from "immer";
 import create from "zustand";
 
@@ -17,6 +18,9 @@ export type accentColor =
   | "purple"
   | "pink";
 
+  export type GPSFormat=
+  Protobuf.Config_DisplayConfig_GpsCoordinateFormat;
+
 interface AppState {
   selectedDevice: number;
   devices: {
@@ -27,6 +31,7 @@ interface AppState {
   commandPaletteOpen: boolean;
   darkMode: boolean;
   accent: accentColor;
+  locationFormat: GPSFormat 
 
   setRasterSources: (sources: RasterSource[]) => void;
   addRasterSource: (source: RasterSource) => void;
@@ -38,6 +43,7 @@ interface AppState {
   setCommandPaletteOpen: (open: boolean) => void;
   setDarkMode: (enabled: boolean) => void;
   setAccent: (color: accentColor) => void;
+  setLocMode: (locFormat: GPSFormat) => void;
 }
 
 export const useAppStore = create<AppState>()((set) => ({
@@ -48,6 +54,7 @@ export const useAppStore = create<AppState>()((set) => ({
   commandPaletteOpen: false,
   darkMode: true,
   accent: "orange",
+  locationFormat: Protobuf.Config_DisplayConfig_GpsCoordinateFormat.MGRS,
 
   setRasterSources: (sources: RasterSource[]) => {
     set(
@@ -100,6 +107,13 @@ export const useAppStore = create<AppState>()((set) => ({
     set(
       produce<AppState>((draft) => {
         draft.accent = color;
+      })
+    );
+  },
+  setLocMode(locFormat) {
+    set(
+      produce<AppState>((draft) => {
+        draft.locationFormat = locFormat;
       })
     );
   }

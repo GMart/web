@@ -75,18 +75,13 @@ export const RangeTest = (): JSX.Element => {
         name="enabled"
         control={control}
         render={({ field: { value, ...rest } }) => (
-          <Toggle
-            label="Module Enabled"
-            description="Description"
-            checked={value}
-            {...rest}
-          />
+          <Toggle label="Module Enabled" checked={value} {...rest} />
         )}
       />
       <Input
         type="number"
         label="Message Interval"
-        description="Max transmit power in dBm"
+        description="How long to wait between sending test packets"
         disabled={!moduleEnabled}
         suffix="Seconds"
         {...register("sender", {
@@ -99,7 +94,7 @@ export const RangeTest = (): JSX.Element => {
         render={({ field: { value, ...rest } }) => (
           <Toggle
             label="Save CSV to storage"
-            description="Description"
+            description="ESP32 Only"
             checked={value}
             {...rest}
           />

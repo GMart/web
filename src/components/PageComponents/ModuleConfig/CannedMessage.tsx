@@ -80,7 +80,7 @@ export const CannedMessage = (): JSX.Element => {
         render={({ field: { value, ...rest } }) => (
           <Toggle
             label="Module Enabled"
-            description="Description"
+            description="Enable canned messages"
             checked={value}
             {...rest}
           />
@@ -90,38 +90,33 @@ export const CannedMessage = (): JSX.Element => {
         name="rotary1Enabled"
         control={control}
         render={({ field: { value, ...rest } }) => (
-          <Toggle
-            label="Rotary Encoder #1 Enabled"
-            description="Description"
-            checked={value}
-            {...rest}
-          />
+          <Toggle label="Rotary Encoder #1 Enabled" checked={value} {...rest} />
         )}
       />
       <Input
         label="Encoder Pin A"
-        description="Max transmit power in dBm"
+        description="GPIO Pin Value (1-39) For encoder port A"
         type="number"
         disabled={moduleEnabled}
         {...register("inputbrokerPinA", { valueAsNumber: true })}
       />
       <Input
         label="Encoder Pin B"
-        description="Max transmit power in dBm"
+        description="GPIO Pin Value (1-39) For encoder port B"
         type="number"
         disabled={moduleEnabled}
         {...register("inputbrokerPinB", { valueAsNumber: true })}
       />
       <Input
-        label="Endoer Pin Press"
-        description="Max transmit power in dBm"
+        label="Encoder Pin Press"
+        description="GPIO Pin Value (1-39) For encoder Press"
         type="number"
         disabled={moduleEnabled}
         {...register("inputbrokerPinPress", { valueAsNumber: true })}
       />
       <Select
         label="Clockwise event"
-        description="This is a description."
+        description="Select input event."
         disabled={moduleEnabled}
         {...register("inputbrokerEventCw", { valueAsNumber: true })}
       >
@@ -131,7 +126,7 @@ export const CannedMessage = (): JSX.Element => {
       </Select>
       <Select
         label="Counter Clockwise event"
-        description="This is a description."
+        description="Select input event."
         disabled={moduleEnabled}
         {...register("inputbrokerEventCcw", { valueAsNumber: true })}
       >
@@ -141,7 +136,7 @@ export const CannedMessage = (): JSX.Element => {
       </Select>
       <Select
         label="Press event"
-        description="This is a description."
+        description="Select input event"
         disabled={moduleEnabled}
         {...register("inputbrokerEventPress", { valueAsNumber: true })}
       >
@@ -155,7 +150,7 @@ export const CannedMessage = (): JSX.Element => {
         render={({ field: { value, ...rest } }) => (
           <Toggle
             label="Up Down enabled"
-            description="Description"
+            description="Enable the up / down encoder"
             checked={value}
             {...rest}
           />
@@ -163,7 +158,7 @@ export const CannedMessage = (): JSX.Element => {
       />
       <Input
         label="Allow Input Source"
-        description="Max transmit power in dBm"
+        description="Select from: '_any', 'rotEnc1', 'upDownEnc1', 'cardkb'"
         disabled={moduleEnabled}
         {...register("allowInputSource")}
       />
@@ -173,7 +168,7 @@ export const CannedMessage = (): JSX.Element => {
         render={({ field: { value, ...rest } }) => (
           <Toggle
             label="Send Bell"
-            description="Description"
+            description="Sends a bell character with each message"
             checked={value}
             {...rest}
           />
